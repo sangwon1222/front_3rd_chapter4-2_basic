@@ -26,6 +26,7 @@ jobs:
           aws s3 sync css/ s3://${{ secrets.S3_BUCKET_NAME }}/css --delete
           aws s3 sync images/ s3://${{ secrets.S3_BUCKET_NAME }}/images --delete
           aws s3 sync js/ s3://${{ secrets.S3_BUCKET_NAME }}/js --delete
+          aws s3 cp worker.js s3://${{ secrets.S3_BUCKET_NAME }}/
           aws s3 cp index.html s3://${{ secrets.S3_BUCKET_NAME }}/
 
       - name: Invalidate CloudFront cache
