@@ -7,7 +7,7 @@ async function loadProducts() {
     const products = await response.json();
     displayProducts(products);
   } catch (e) {
-    console.error("Failed to fetch Product", e);
+    throw new Error(`Failed to fetch Product: ${e}`);
   }
 }
 
@@ -92,14 +92,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // Simulate heavy operation. It could be a complex price calculation.
 if (window.Worker) {
-  const myWorker = new Worker("worker.js");
+  const myWorker = new Worker("/worker.js");
   myWorker.postMessage("start");
 
   myWorker.onmessage = function (e) {
-    console.log("received from worker:", e.data);
+    // 로직 처리
   };
 
   myWorker.onerror = function (e) {
-    console.error("Error from worker:", e);
+    // 에러 처리
   };
 }
